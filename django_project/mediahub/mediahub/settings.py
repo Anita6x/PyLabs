@@ -81,7 +81,9 @@ WSGI_APPLICATION = 'mediahub.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL')
+        default=os.getenv('DATABASE_URL'),
+        conn_max_age=600,  # reuse DB connections
+        ssl_require=os.getenv('DATABASE_URL').startswith("postgres://") and not DEBUG
     )
 }
 
