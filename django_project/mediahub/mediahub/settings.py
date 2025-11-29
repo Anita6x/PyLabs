@@ -80,12 +80,17 @@ WSGI_APPLICATION = 'mediahub.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
-        conn_max_age=600,  # reuse DB connections
-        ssl_require=os.getenv('DATABASE_URL').startswith("postgres://") and not DEBUG
+    "default": dj_database_url.config(
+        default=os.getenv(
+            "DATABASE_URL",  
+            "postgres://postgres:yourpassword@localhost:5432/mediahub_db"  # fallback for local
+        ),
+        conn_max_age=600,
     )
 }
+
+if not DEBUG:
+    DATABASES["default"]["ssl_require"] = True
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
