@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ['mediahive-886301ef5a56.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['mediahive-jyfr.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -82,8 +82,7 @@ WSGI_APPLICATION = 'mediahub.wsgi.application'
 DATABASES = {
     "default": dj_database_url.config(
         default=os.getenv(
-            "DATABASE_URL",  
-            "postgres://postgres:yourpassword@localhost:5432/mediahub_db"  # fallback for local
+            "DATABASE_URL"
         ),
         conn_max_age=600,
     )
